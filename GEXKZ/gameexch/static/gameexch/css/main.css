@@ -1,0 +1,37 @@
+main {
+	background-color: #EFE9FF
+}
+
+hr {
+	padding: 1px;
+	margin: 1px;
+}
+
+.game-platform-genre{
+	margin-bottom: 1px;
+}
+
+.game-column {
+	background-color: white;
+}
+
+.game-image {
+	height: 280px;
+	width: 150px;
+	object-fit: cover;
+}
+
+.game-name{
+	overflow: hidden;
+	height: 56px;
+}
+
+.game-description{
+	overflow: auto;
+    height: 179px;
+}
+
+.btn-like:hover, .btn-like:focus, .btn-like:active, .btn-like.active, .open>.dropdown-toggle.btn-like {
+    background-color: #FF4040;
+    border-color: #750000; /*set the color you want here*/
+}

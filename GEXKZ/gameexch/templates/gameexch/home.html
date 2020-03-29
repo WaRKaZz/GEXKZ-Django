@@ -1,0 +1,44 @@
+{% extends "gameexch/base.html" %}
+{% load static %}
+{% block content %}
+	<div class="row mx-auto">
+		{% for game in games %}
+			<div class="col-md-6 col-xs-12">
+				<div class="row game-column my-3 mr-1 py-3">
+					<div class="col-md-4 col-xs-4">
+						<img class="img-fluid  game-image" src="{% static 'gameexch/game-covers/zelda-botw-cover.jpg' %}">
+					</div>
+					<div class="col-md-8 col-xs-8">
+						<h4 class="game-name">{{game.gamename}}</h4>
+						<hr>
+						<div class="row mx-auto">
+							<div class="col-6 text-center">
+								<p class="text-weight-bold game-platform-genre">Console: {{game.console}}</p>
+							</div>
+							<div class="col-6 text-center game-platform-genre">
+								<p class="text-weight-bold game-platform-genre">Genre: {{game.genre}}</p>
+							</div>
+						</div>
+						<hr>
+						<p class="game-description text-sm-left"><small>{{game.content}}</small></p>
+					</div>
+					<div class="col-4 text-center">
+						<form action="#" method="post">
+							<button class="btn btn-outline-dark" type="whislist">Whishlist</button>
+						</form>
+					</div>
+					<div class="col-4 text-center">
+						<form action="#" method="post">
+							<button class="btn btn-outline-dark" type="owner">Owner</button>
+						</form>
+					</div>
+					<div class="col-4 text-center">
+						<form action="#" method="post">
+							<button class="btn btn-outline-dark btn-like" type="whislist"><i class="far fa-heart"></i> {{game.likes}}</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		{% endfor %}
+	</div>
+{% endblock content %}
