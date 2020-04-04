@@ -28,10 +28,10 @@ hr {
 
 .game-description{
 	overflow: auto;
-    height: 179px;
+	height: 179px;
 }
 
 .btn-like:hover, .btn-like:focus, .btn-like:active, .btn-like.active, .open>.dropdown-toggle.btn-like {
-    background-color: #FF4040;
-    border-color: #750000; /*set the color you want here*/
+	background-color: #FF4040;
+	border-color: #750000;
 }
