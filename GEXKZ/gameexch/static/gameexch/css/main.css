@@ -9,21 +9,20 @@ hr {
 
 .game-platform-genre{
 	margin-bottom: 1px;
+	margin-top: 0;
 }
 
 .game-column {
 	background-color: white;
 }
 
-.game-image {
+.gex-image {
 	height: 280px;
 	width: 150px;
 	object-fit: cover;
 }
-
 .game-name{
 	overflow: hidden;
-	height: 56px;
 }
 
 .game-description{

@@ -1,0 +1,18 @@
+{% extends "gameexch/base.html" %}
+{% block content %}
+	<div class="row py-4">
+		<div class="col-md-4 col-sm-4 text-center">
+				<img class="img-fluid gex-image" src="{{ user.profile.image.url }}">
+			</div>
+		<div class="col-md-4 col-sm-7">
+			<h4 class="profile-name border-bottom">{{ user.username }}</h4>
+			<p class="text-weight-bold">E-mail: {{ user.email }}</p>
+		</div>
+		<div class="col-md-4 col-sm-8">
+			<h4 class="profile-name border-bottom">Games:</h4>
+			<p><a href="#">Wanted Games</a></p>
+			<p><a href="#">Owned Games</a></p>
+			<p><a href="#">Liked Games</a></p>
+		</div>
+	</div>
+{% endblock content %}

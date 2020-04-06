@@ -3,20 +3,17 @@ from django.utils import timezone
 from django.contrib.auth.models import User
 
 
-USER_RULES = (
-	('A', 'Admin'),
-	('T', 'Technichian'),
-	('M', 'Moderator'),
-	('U', 'User'),
-	)
-
-
 class Console(models.Model):
 	name = models.CharField(max_length=40)
-	logo_url = models.CharField(max_length=100)
-	
+	short_name = models.CharField(max_length=5, null=True)
+	logo_url = models.ImageField(default='default-console-logo.jpg', 
+						      upload_to='console_pics')
+
 	def __str__(self):
 		return self.name
+		
+	class Meta:
+		ordering = ('name',)
 
 
 class City(models.Model):
@@ -29,7 +26,8 @@ class City(models.Model):
 class Game(models.Model):
 	name = models.CharField(max_length=40)
 	description = models.TextField()
-	image_url = models.CharField(max_length=100)
+	image = models.ImageField(default='default-game-image.jpg', 
+						      upload_to='game_pics')
 	genre = models.CharField(max_length=30)
 	likes = models.PositiveIntegerField()
 	console = models.ForeignKey(Console, on_delete=models.CASCADE)
