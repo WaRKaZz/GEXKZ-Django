@@ -2,15 +2,49 @@
 {% load crispy_forms_tags %}
 {% block content %}
 	<div class="row py-4">
-		<div class="col-md-4 col-sm-4 text-center">
+		<div class="col-sm-4 col-md-3 text-center">
 				<img class="img-fluid gex-image" src="{{ user.profile.image.url }}">
 			</div>
-		<div class="col-md-4 col-sm-7">
-			<h4 class="profile-name border-bottom">{{ user.username }}</h4>
-			<p class="text-weight-bold">E-mail: {{ user.email }}</p>
-			<a href="{% url 'profile-edit' %}">Edit Profile</a>
+		<div class="col-sm-8 col-md-6">
+			<h4 class="profile-name border-bottom text-center">{{ user.username }}</h4>
+			<div class="row mx-auto">
+				<div class="col-6 mt-1">
+					<small>
+						<p class="user-profile-info">E-mail: {{ user.email }}</p>
+						{% if user.first_name or user.last_name %}
+							<p class="user-profile-info">Name: {{ user.first_name }} {{ user.last_name }}</p>
+						{% endif %}
+						{% if user.profile.city %}
+							<p class="user-profile-info">City: {{ user.profile.city.name }}</p>
+						{% endif %}
+					</small>
+				</div>
+				<div class="col-6 mt-1">
+					<small>
+						{% if user.profile.phone %}
+							<p class="user-profile-info">Phone: {{ user.profile.phone }}</p>
+						{% endif %}
+						{% if user.profile.vk %}
+							<a href="{{user.profile.vk}}" target="_blank"><p class="user-profile-info"><i class="fab fa-vk fa-lg"></i>: {{user.profile.vk}}</p></a>
+						{% else %}
+							<p class="user-profile-info"><i class="fab fa-vk fa-lg"></i>: Not yet :(</p>
+						{% endif %}
+						{% if user.profile.whatsapp %}
+							<a href="https://api.whatsapp.com/send?phone={{user.profile.whatsapp}}" target="_blank"><p class="user-profile-info"><i class="fab fa-whatsapp fa-lg"></i>: {{user.profile.whatsapp}}</p></a>
+						{% else %}
+							<p class="user-profile-info"><i class="fab fa-whatsapp fa-lg"></i>: Not yet :(</p>
+						{% endif %}
+						{% if user.profile.telegram %}
+							<p class="user-profile-info"><i class="fab fa-telegram-plane fa-lg"></i>: {{user.profile.telegram}}</p>
+						{% else %}
+							<p class="user-profile-info"><i class="fab fa-telegram-plane fa-lg"></i>: Not Yet :(</p>
+						{% endif %}
+					</small>
+				</div>
+				<div class="col-6 mt-1"><a href="{% url 'profile-edit' %}">Edit Profile</a></div>
+			</div>
 		</div>
-		<div class="col-md-4 col-sm-8">
+		<div class="col-sm-8 col-md-3">
 			<h4 class="profile-name border-bottom">Games:</h4>
 			<p><a href="#">Wanted Games</a></p>
 			<p><a href="#">Owned Games</a></p>

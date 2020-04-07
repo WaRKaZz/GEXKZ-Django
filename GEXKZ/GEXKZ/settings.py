@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'gameexch.apps.GameexchConfig',
     'users.apps.UsersConfig',
     'crispy_forms',
+    'phonenumber_field'
 ]
 
 MIDDLEWARE = [
@@ -132,3 +133,5 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 LOGIN_REDIRECT_URL = 'gex-home'
 
 LOGIN_URL = 'login'
+
+PHONENUMBER_DB_FORMAT = 'E164'
