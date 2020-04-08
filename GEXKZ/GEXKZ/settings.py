@@ -130,7 +130,7 @@ MEDIA_URL = '/media/'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-LOGIN_REDIRECT_URL = 'gex-home'
+LOGIN_REDIRECT_URL = 'gex-game-view'
 
 LOGIN_URL = 'login'
 

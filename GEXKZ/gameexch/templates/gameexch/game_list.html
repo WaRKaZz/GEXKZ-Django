@@ -2,14 +2,14 @@
 {% load static %}
 {% block content %}
 	<div class="row mx-auto">
-		{% for game in games %}
+		{% for game in object_list %}
 			<div class="col-md-6 col-sm-12">
 				<div class="row game-column my-3 mx-1 py-3 text-center">
 					<div class="col-md-4 col-sm-4">
 						<img class="img-fluid gex-image" src="{{game.image.url}}">
 					</div>
 					<div class="col-md-8 col-sm-8">
-						<h4 class="game-name border-bottom">{{game.name}}</h4>
+						<h4 class="game-name border-bottom"><a href="{% url 'gex-game-datail' game.id %}">{{game.name}}</a></h4>
 						<div class="row mx-auto">
 							<div class="col-6 text-center">
 								<p class="text-weight-bold game-platform-genre"><small>Console: {{game.console.name}}</small></p>

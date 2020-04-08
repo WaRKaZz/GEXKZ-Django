@@ -27,7 +27,8 @@ class Game(models.Model):
 	image = models.ImageField(default='default-game-image.jpg', 
 						      upload_to='game_pics')
 	genre = models.CharField(max_length=30)
-	likes = models.PositiveIntegerField()
+	likes = models.PositiveIntegerField(default=0)
+	liked_by = models.ForeignKey(User, 
 	console = models.ForeignKey(Console, on_delete=models.CASCADE)
 	
 	def __str__(self):

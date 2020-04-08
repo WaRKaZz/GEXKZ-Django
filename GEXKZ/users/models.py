@@ -4,6 +4,12 @@ from gameexch.models import City
 from phonenumber_field.modelfields import PhoneNumberField
 from PIL import Image
 
+RULES = (
+	('A', 'Administrator'),
+	('M', 'Moderator'),
+	('U', 'User')
+	)
+
 
 class Profile(models.Model):
 	user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -16,6 +22,9 @@ class Profile(models.Model):
 	phone = PhoneNumberField(null=True, blank=True)
 	whatsapp = PhoneNumberField(null=True, blank=True)
 	telegram = PhoneNumberField(null=True, blank=True)
+	ban_commentary = models.TextField(null=True)
+	rules = models.CharField(choices=RULES, max_length=1, default='U')
+	banned = models.BooleanField(default=False)
 	
 	def __str__ (self):
 		return f'{self.user.username} Profile'

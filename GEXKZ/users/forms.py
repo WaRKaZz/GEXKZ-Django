@@ -1,8 +1,17 @@
 from django import forms
 from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from .models import Profile
 
+
+class CheckBannedAuthenticationForm(AuthenticationForm):
+	
+	def confirm_login_allowed(self, user):
+		print(user.profile.banned)
+		if user.profile.banned:
+			raise forms.ValidationError('This account banned',
+									     code='banned'
+			)
 
 class UserRegistrationForm(UserCreationForm):
 	

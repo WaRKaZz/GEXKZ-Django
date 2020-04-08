@@ -1,0 +1,41 @@
+{% extends "gameexch/base.html" %}
+{% load static %}
+{% block content %}
+	<div class="row justify-content-md-center">
+		<div class="col-md-8 col-sm-12"> 
+			<div class="row game-column my-3 mx-1 py-3 text-center">
+				<div class="col-md-4 col-sm-4">
+					<img class="img-fluid gex-image" src="{{game.image.url}}">
+				</div>
+				<div class="col-md-8 col-sm-8">
+					<h4 class="game-name border-bottom">{{object.name}}</h4>
+					<div class="row mx-auto">
+						<div class="col-6 text-center">
+							<p class="text-weight-bold game-platform-genre"><small>Console: {{object.console.name}}</small></p>
+						</div>
+						<div class="col-6 text-center game-platform-genre">
+							<p class="text-weight-bold game-platform-genre"><small>Genre: {{object.genre}}</small></p>
+						</div>
+					</div>
+					<hr>
+					<p class="game-description text-sm-left font-italic"><small>{{object.description}}</small></p>
+				</div>
+				<div class="col-md-4 text-center">
+					<form action="#" method="post">
+						<button class="btn btn-outline-dark" type="whislist">Whishlist</button>
+					</form>
+				</div>
+				<div class="col-md-4 text-center">
+					<form action="#" method="post">
+						<button class="btn btn-outline-dark" type="owner">Owner</button>
+					</form>
+				</div>
+				<div class="col-md-4 text-center">
+					<form action="#" method="post">
+						<button class="btn btn-outline-dark btn-like" type="whislist"><i class="far fa-heart"></i> {{object.likes}}</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock content %}
