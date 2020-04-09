@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from gameexch.models import City
+from gameexch.models import City, Game
 from phonenumber_field.modelfields import PhoneNumberField
 from PIL import Image
 
@@ -25,6 +25,7 @@ class Profile(models.Model):
 	ban_commentary = models.TextField(null=True)
 	rules = models.CharField(choices=RULES, max_length=1, default='U')
 	banned = models.BooleanField(default=False)
+	likes = models.ManyToManyField(Game, blank=True)
 	
 	def __str__ (self):
 		return f'{self.user.username} Profile'

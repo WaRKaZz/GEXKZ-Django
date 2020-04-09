@@ -2,6 +2,7 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
 from PIL import Image
+from django.urls import reverse
 
 
 class Console(models.Model):
@@ -28,7 +29,6 @@ class Game(models.Model):
 						      upload_to='game_pics')
 	genre = models.CharField(max_length=30)
 	likes = models.PositiveIntegerField(default=0)
-	liked_by = models.ForeignKey(User, 
 	console = models.ForeignKey(Console, on_delete=models.CASCADE)
 	
 	def __str__(self):
@@ -43,6 +43,9 @@ class Game(models.Model):
 			output_size = (300, 300)
 			img.thumbnail(output_size)
 			img.save(self.image.path)
+	
+	def get_absolute_url(self):
+		return reverse('gex-game-datail', kwargs={'pk': self.pk})
 
 
 

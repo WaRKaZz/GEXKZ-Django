@@ -2,7 +2,13 @@ from django.shortcuts import render
 from django.views.generic import (
 	ListView, 
 	DetailView, 
-	CreateView
+	CreateView,
+	UpdateView,
+	DeleteView
+)
+from django.contrib.auth.mixins import(
+	LoginRequiredMixin, 
+	UserPassesTestMixin
 )
 from .models import Game
 
@@ -22,12 +28,27 @@ class GameListView(ListView):
 class GameDetailView(DetailView):
 	model = Game 
 
-class GameCreateView(CreateView):
+class GameCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
 	model = Game
-	fields['name', 'desctiption', 'image', 'genre', 'console']
+	fields = ['name', 'description', 'image', 'genre', 'console']
+	
+	def test_func(self):
+		return (self.request.user.profile.rules == 'M' 
+		or self.request.user.profile.rules == 'A')
 
-class GameUpdateView(CreateView):
+class GameUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 	model = Game
+	fields = ['name', 'description', 'image', 'genre', 'console']
+	
+	def test_func(self):
+		return (self.request.user.profile.rules == 'M' 
+		or self.request.user.profile.rules == 'A')
 
-class GameDeleteView(CreateView):
+class GameDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 	model = Game
+	success_url = '/'
+	
+	def test_func(self):
+		return (self.request.user.profile.rules == 'M' 
+		or self.request.user.profile.rules == 'A')
+

@@ -1,0 +1,21 @@
+{% extends "gameexch/base.html" %}
+{% block content %}
+	<div class="row mx-auto">
+		<div class="col-md-6 col-xs-12">
+			<form method="POST">
+				{% csrf_token %}
+				<fieldset class="form-group">
+					<legend class="border-bottom my-4">Delete Post</legend>
+					<h5> Are you sure you want to delete the game "{{object.name}}"?</h5>
+				</fieldset>
+				<div class="form-group">
+					<button class="btn btn-outline-danger" type="submit">Yes, Delete</button>
+					<a class="btn btn-outline-dark" href="{% url 'gex-game-datail' object.id %}">Cancel</a>
+				</div>
+			</form>
+		</div>
+		<div class="col-md-6 col-xs-12 my-3">
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed doeiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enimad minim veniam, quis nostrud exercitation ullamco laboris nisi utaliasd</p>
+		</div>
+	</div>
+{% endblock content %}

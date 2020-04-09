@@ -2,7 +2,7 @@
 {% load static %}
 {% block content %}
 	<div class="row justify-content-md-center">
-		<div class="col-md-8 col-sm-12"> 
+		<div class="col-md-9 col-sm-12"> 
 			<div class="row game-column my-3 mx-1 py-3 text-center">
 				<div class="col-md-4 col-sm-4">
 					<img class="img-fluid gex-image" src="{{game.image.url}}">
@@ -37,5 +37,12 @@
 				</div>
 			</div>
 		</div>
+		{% if user.profile.rules == 'M' or user.profile.rules == 'A' %}
+			<div class="col-md-3 col-sm-12 my-3">
+				<h4 class="border-bottom">Moderation Options</h4>
+				<p><a href="{% url 'gex-game-update' object.id %}">Update Game</a></p>
+				<p><a href="{% url 'gex-game-delete' object.id %}">Delete Game</a></p>
+			</div>
+		{% endif %}
 	</div>
 {% endblock content %}
