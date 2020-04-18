@@ -50,9 +50,7 @@ class Game(models.Model):
 
 
 class UserComment(models.Model):
-	message = models.TextField()
-	number = models.PositiveIntegerField()
-	likes = models.PositiveIntegerField()
+	message = models.TextField(max_length=240)
 	date_posted = models.DateTimeField(default=timezone.now)
 	author = models.ForeignKey(User, on_delete=models.CASCADE,
 							   related_name='author_comment_set')
@@ -63,9 +61,7 @@ class UserComment(models.Model):
 		return self.message
 
 class GameComment(models.Model):
-	message = models.TextField()	
-	number = models.PositiveIntegerField()
-	likes = models.PositiveIntegerField()
+	message = models.TextField(max_length=240)	
 	date_posted = models.DateTimeField(default=timezone.now)
 	author = models.ForeignKey(User, on_delete=models.CASCADE)
 	game = models.ForeignKey(Game, on_delete=models.CASCADE)

@@ -51,7 +51,7 @@
 			<p><a href="#">Liked Games</a></p>
 			{% if user.profile.rules == 'M' or user.profile.rules == 'A' %}
 				<h4 class="profile-name border-bottom">Moderation:</h4>
-				p><a href="{% url 'gex-game-create' %}">Add New Game</a></p>
+				<a href="{% url 'gex-game-create' %}">Add New Game</a></p>
 			{% endif %}
 		</div>
 	</div>

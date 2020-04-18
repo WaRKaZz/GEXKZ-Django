@@ -1,5 +1,6 @@
 {% extends "gameexch/base.html" %}
 {% load static %}
+{% load crispy_forms_tags %}
 {% block content %}
 	<div class="row justify-content-md-center">
 		<div class="col-md-9 col-sm-12"> 
@@ -42,6 +43,38 @@
 				<h4 class="border-bottom">Moderation Options</h4>
 				<p><a href="{% url 'gex-game-update' object.id %}">Update Game</a></p>
 				<p><a href="{% url 'gex-game-delete' object.id %}">Delete Game</a></p>
+			</div>
+		{% endif %}
+		<div class="col-md-9 col-sm-12">
+			<div class="row mx-1">
+				<div class="col-12">
+					<form method="POST">
+						{% csrf_token %}
+						<fieldset class="form-group">
+							<legend class="border-bottom my-4">Leave a message</legend>
+							{{ comment_form|crispy }}
+						</fieldset>
+						<div class="form-group">
+							<button class="btn btn-outline-dark" type="submit">Submit</button>
+						</div>
+					</form>
+				</div>
+				{% for comment in comments %}
+					<div class="col-md-2 col-sm-4 py-3 my-1 text-center comment-section">
+						<img class="img-fluid gex-comment-image" src="{{comment.author.profile.image.url}}">
+						{% if comment.author.profile.rules == 'U' and user.profile.rules == 'M' or user.profile.rules == 'A' or user == comment.author %}
+						<small><a href="{% url 'gex-game-comment-delete' comment.id %}">Delete</a></small>
+						{% endif %}
+					</div>
+					<div class="col-md-10 col-sm-8 py-3 my-1 comment-section">
+						<h5 class="border-bottom">{{comment.author.username}}</h5>
+						<p>{{comment.message}}</p>
+					</div>
+				{% endfor %}
+			</div>
+		</div>
+		{% if user.profile.rules == 'M' or user.profile.rules == 'A' %}
+			<div class="col-md-3 col-sm-12">
 			</div>
 		{% endif %}
 	</div>

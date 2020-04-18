@@ -16,11 +16,22 @@ hr {
 	background-color: white;
 }
 
+.comment-section {
+	background-color: white;
+}
+
 .gex-image {
 	height: 250px;
 	width: 150px;
 	object-fit: cover;
 }
+
+.gex-comment-image{
+	height: 70px;
+	width: 70px;
+	object-fit: cover;
+}
+
 .game-name{
 	overflow: hidden;
 }
