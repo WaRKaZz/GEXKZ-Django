@@ -20,6 +20,7 @@ from django.contrib.auth import views as auth_views
 from django.conf import settings
 from django.conf.urls.static import static
 from users.forms import CheckBannedAuthenticationForm
+from users.views import ProfileDetailView, ProfileBanView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -34,6 +35,10 @@ urlpatterns = [
          name='logout'),
     path('profile/', user_views.profile, name='profile'),
     path('profile/edit/', user_views.profile_edit, name='profile-edit'),
+    path('profile/<int:pk>', ProfileDetailView.as_view(), name='profile-view'),
+    path('profile/edit/<int:profile_id>', user_views.profile_moderation, name='profile-moderation'),
+    path('profile/ban/<int:pk>' , ProfileBanView.as_view(), name='profile-ban'),
+    
 ]
 
 
