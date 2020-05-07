@@ -5,40 +5,40 @@ from .models import Profile
 from gameexch.models import UserComment
 
 class CheckBannedAuthenticationForm(AuthenticationForm):
-	
-	def confirm_login_allowed(self, user):
-		print(user.profile.banned)
-		if user.profile.banned:
-			raise forms.ValidationError('This account banned',
-									     code='banned'
-			)
+
+    def confirm_login_allowed(self, user):
+        print(user.profile.banned)
+        if user.profile.banned:
+            raise forms.ValidationError('This account banned',
+                                        code='banned'
+                                        )
 
 class UserRegistrationForm(UserCreationForm):
-	
-	email = forms.EmailField()
-		
-	class Meta:
-		model = User
-		fields = ['username', 'email', 'password1', 'password2']
+
+    email = forms.EmailField()
+
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'password1', 'password2']
 
 
 class UserUpdateForm(forms.ModelForm):
-	
-	email = forms.EmailField()
-		
-	class Meta:
-		model = User
-		fields = ['username', 'email', 'first_name', 'last_name']
+
+    email = forms.EmailField()
+
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'first_name', 'last_name']
 
 class ProfileUpdateForm(forms.ModelForm):
-	
-	class Meta:
-		model = Profile
-		fields = ['image', 'vk', 'city', 'about', 'phone',
-				 'whatsapp', 'telegram']
+
+    class Meta:
+        model = Profile
+        fields = ['image', 'vk', 'city', 'about', 'phone',
+                  'whatsapp', 'telegram']
+
 
 class UserCommentForm(forms.ModelForm):
-	class Meta:
-		model = UserComment
-		fields = ['message',]
-
+    class Meta:
+        model = UserComment
+        fields = ['message', ]

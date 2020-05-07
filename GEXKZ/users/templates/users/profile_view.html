@@ -60,6 +60,9 @@
 					<a href="{% url 'profile-ban' object.id %}">Ban User</a></p>
 					<a href="{% url 'profile-moderation' object.id %}">Edit User</a></p>
 				{% endif %}
+				{% if user.profile.rules == 'A' %}
+					<a href="{% url 'profile-rules' object.id %}">Change User Rules</a></p>
+				{% endif %}
 			</div>
 		{% endif %}
 	</div>
