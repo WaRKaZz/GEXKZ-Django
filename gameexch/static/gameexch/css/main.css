@@ -1,52 +1,10 @@
-body {
-	background-color: white;
-	background-image: url("/media/background_photo.jpeg");
-}
-
-hr {
-	padding: 1px;
-	margin: 1px;
-}
-
-.game-platform-genre{
-	margin-bottom: 1px;
-	margin-top: 0;
-}
-
-.game-column {
-	background-color: rgba(255, 255, 255, 0.7);
-}
-
-.comment-section {
-	background-color: rgba(255, 255, 255, 1);
-}
-
-.gex-image {
-	height: 250px;
-	width: 150px;
-	object-fit: cover;
-}
-
-.gex-comment-image{
-	height: 70px;
-	width: 70px;
-	object-fit: cover;
-}
-
-.game-name{
-	overflow: hidden;
-}
-
-.game-description{
-	overflow: auto;
-	height: 179px;
+body{
+	font-family:Helvetica,Arial,sans-serif;
+  	background-color:#15193f;
+  	color:#fff;
 }
 
 .btn-like:hover, .btn-like:focus, .btn-like:active, .btn-like.active, .open>.dropdown-toggle.btn-like {
 	background-color: #FF4040;
 	border-color: #750000;
-}
-
-.user-profile-info{
-	margin: 0;
 }

@@ -1,4 +1,6 @@
 {
-    "git.ignoreLimitWarning": true,
-    "python.pythonPath": "/home/warkazz/gex-venv/bin/python"
+    "python.pythonPath": "/home/warkazz/Project/GEXenv/bin/python3",
+    "python.linting.pylintEnabled": false,
+    "python.linting.flake8Enabled": true,
+    "python.linting.enabled": true
 }

@@ -125,13 +125,10 @@ class ProfileBanView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         if (self.get_object().rules == 'M' or self.get_object().rules == 'A'):
             return False
         else:
-            return (self.request.user.profile.rules == 'M'
-                    or self.request.user.profile.rules == 'A')
+            return (self.request.user.profile.rules == 'M' or self.request.user.profile.rules == 'A')
 
 
-class ProfileRulesChangeView(LoginRequiredMixin,
-                             UserPassesTestMixin,
-                             UpdateView):
+class ProfileRulesChangeView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Profile
     template_name = 'users/profile_form.html'
     fields = ['rules']
