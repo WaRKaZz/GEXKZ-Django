@@ -1,80 +1,49 @@
 {% extends "gameexch/base/base.html" %}
 {% load static %}
+{% load gex_tags %}
 {% load crispy_forms_tags %}
 {% block content %}
-	<div class="row justify-content-md-center">
-		<div class="col-md-9 col-sm-12"> 
-			<div class="row game-column my-3 mx-1 py-3 text-center border border-dark">
-				<div class="col-md-4 col-sm-4">
-					<img class="img-fluid gex-image" src="{{game.image.url}}">
-				</div>
-				<div class="col-md-8 col-sm-8">
-					<h4 class="game-name border-bottom">{{object.name}}</h4>
-					<div class="row mx-auto">
-						<div class="col-6 text-center">
-							<p class="text-weight-bold game-platform-genre"><small>Console: {{object.console.name}}</small></p>
-						</div>
-						<div class="col-6 text-center game-platform-genre">
-							<p class="text-weight-bold game-platform-genre"><small>Genre: {{object.genre}}</small></p>
-						</div>
+{% get_game_options user.pk game.pk as u2g %}
+	<div class="row justify-content-center">
+		<div class="col-md-8 col-sm-12"> 
+			<div class="img-wrapper mx-xs-0 mx-md-3 mx-lg-4 mx-xl-5">
+				<img class="img-responsive" src="{{game.image.url}}">
+				<div class="row img-overlay-options">
+					<div class="col-6 btn-left">
+						<form method="post">
+							{% csrf_token %}
+							<input type="hidden" name="game_pk" value="{{game.pk}}">
+							<button type="submit" name="method" value="owner" class="btn {% if u2g.is_owner %}btn-success{% else %}btn-primary{% endif %}" title='Owner'><i class="fas fa-check"></i></button>
+							<button type="submit" name="method" value="whishlist" class="btn {% if u2g.is_wanted %}btn-success{% else %}btn-primary{% endif %}" title='Whishlist'><i class="fas fa-cart-plus"></i></button>
+						</form>
 					</div>
-					<hr>
-					<p class="game-description text-sm-left font-italic"><small>{{object.description}}</small></p>
+					<div class="col-6 btn-right">
+						<form method="post">
+							{% csrf_token %}
+							<input type="hidden" name="game_pk" value="{{game.pk}}">
+							<button type="submit" name="method" value="like" class="btn {% if u2g.is_like %}btn-danger{% else %}btn-primary{% endif %} btn-like" title='Like'><i class="far fa-heart"></i> {{game.likes}}</button>								
+						</form>
+					</div>
 				</div>
-				<div class="col-md-4 text-center">
-					<form action="#" method="post">
-						<button class="btn btn-outline-dark" type="whislist">Whishlist</button>
-					</form>
-				</div>
-				<div class="col-md-4 text-center">
-					<form action="#" method="post">
-						<button class="btn btn-outline-dark" type="owner">Owner</button>
-					</form>
-				</div>
-				<div class="col-md-4 text-center">
-					<form action="#" method="post">
-						<button class="btn btn-outline-dark btn-like" type="whislist"><i class="far fa-heart"></i> {{object.likes}}</button>
-					</form>
+				<div class='col-12 px-0 py-1 text-center nowrap'>
+					<h5 class="border-bottom mb-0"><a class="text-center" title="{{game.name}}" href="{% url 'gex-game-datail' game.id %}">{{game.name}}</a></h4>
+					<p class="my-0">Platform: {{game.platform.name}}</p>
+					<p class="my-0">Genres: {% for genre in object.genre.all %}<span class="border-bottom">{{genre.name}}</span>  {% endfor %}</p>
 				</div>
 			</div>
 		</div>
 		{% if user.profile.rules == 'M' or user.profile.rules == 'A' %}
-			<div class="col-md-3 col-sm-12 my-3">
+			<div class="col-12 col-md-4">
 				<h4 class="border-bottom">Moderation Options</h4>
 				<p><a href="{% url 'gex-game-update' object.id %}">Update Game</a></p>
 				<p><a href="{% url 'gex-game-delete' object.id %}">Delete Game</a></p>
 			</div>
 		{% endif %}
-		<div class="col-md-9 col-sm-12">
-			<div class="row mx-1">
-				<div class="col-12">
-					<form method="POST">
-						{% csrf_token %}
-						<fieldset class="form-group">
-							<legend class="border-bottom my-4">Leave a message</legend>
-							{{ comment_form|crispy }}
-						</fieldset>
-						<div class="form-group">
-							<button class="btn btn-outline-dark" type="submit">Submit</button>
-						</div>
-					</form>
-				</div>
-				{% for comment in comments %}
-					<div class="col-md-2 col-sm-4 py-3 my-1 text-center comment-section">
-						<img class="img-fluid gex-comment-image" src="{{comment.author.profile.image.url}}">
-						{% if comment.author.profile.rules == 'U' and user.profile.rules == 'M' or user.profile.rules == 'A' or user == comment.author %}
-						<small><a href="{% url 'gex-game-comment-delete' comment.id %}">Delete</a></small>
-						{% endif %}
-					</div>
-					<div class="col-md-10 col-sm-8 py-3 my-1 comment-section">
-						<h5 class="border-bottom">{{comment.author.username}}</h5>
-						<p>{{comment.message}}</p>
-					</div>
-				{% endfor %}
-			</div>
+		<div class="col-md-8 col-sm-12"> 
+			{% include "gameexch/game_commentary_block.html" %}
 		</div>
 		{% if user.profile.rules == 'M' or user.profile.rules == 'A' %}
-			<div class="col-md-3 col-sm-12">
+			<div class="col-12 col-md-4">
 			</div>
 		{% endif %}
 	</div>

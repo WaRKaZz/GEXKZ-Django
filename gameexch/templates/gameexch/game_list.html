@@ -1,43 +1,37 @@
 {% extends "gameexch/base/base.html" %}
 {% load static %}
+{% load gex_tags %}
 {% block content %}
 	<div class="row mx-auto">
-		{% for game in object_list %}
-			<div class="col-md-6 col-sm-12">
-				<div class="row game-column my-3 mx-1 py-3 text-center border border-dark">
-					<div class="col-md-4 col-sm-4">
-						<img class="img-fluid gex-image" src="{{game.image.url}}">
-					</div>
-					<div class="col-md-8 col-sm-8">
-						<h4 class="game-name border-bottom"><a href="{% url 'gex-game-datail' game.id %}">{{game.name}}</a></h4>
-						<div class="row mx-auto">
-							<div class="col-6 text-center">
-								<p class="text-weight-bold game-platform-genre"><small>Console: {{game.console.name}}</small></p>
-							</div>
-							<div class="col-6 text-center game-platform-genre">
-								<p class="text-weight-bold game-platform-genre"><small>Genre: {{game.genre}}</small></p>
-							</div>
+		{% for game in page_obj %}
+			{% get_game_options user.pk game.pk as u2g %}
+			<div class="col-md-6 col-lg-4 col-xl-3 my-2">
+				<div class="img-wrapper">
+					<img class="img-responsive" src="{{game.image.url}}">
+					<div class="row img-overlay-options">
+						<div class="col-6 btn-left">
+							<form method="post">
+								{% csrf_token %}
+								<input type="hidden" name="game_pk" value="{{game.pk}}">
+								<button type="submit" name="method" value="owner" class="btn {% if u2g.is_owner %}btn-success{% else %}btn-primary{% endif %} btn-sm" title='Owner'><i class="fas fa-check"></i></button>
+								<button type="submit" name="method" value="whishlist" class="btn {% if u2g.is_wanted %}btn-success{% else %}btn-primary{% endif %} btn-sm" title='Whishlist'><i class="fas fa-cart-plus"></i></button>
+							</form>
 						</div>
-						<hr>
-						<p class="game-description text-sm-left font-italic"><small>{{game.description}}</small></p>
+						<div class="col-6 btn-right">
+							<form method="post">
+								{% csrf_token %}
+								<input type="hidden" name="game_pk" value="{{game.pk}}">
+								<button type="submit" name="method" value="like" class="btn btn-sm {% if u2g.is_like %}btn-danger{% else %}btn-primary{% endif %} btn-like" title='Like'><i class="far fa-heart"></i> {{game.likes}}</button>								
+							</form>
+						</div>
 					</div>
-					<div class="col-md-4 text-center">
-						<form action="#" method="post">
-							<button class="btn btn-outline-dark" type="whislist">Whishlist</button>
-						</form>
-					</div>
-					<div class="col-md-4 text-center">
-						<form action="#" method="post">
-							<button class="btn btn-outline-dark" type="owner">Owner</button>
-						</form>
-					</div>
-					<div class="col-md-4 text-center">
-						<form action="#" method="post">
-							<button class="btn btn-outline-dark btn-like" type="whislist"><i class="far fa-heart"></i> {{game.likes}}</button>
-						</form>
-					</div>
+				</div>
+				<div class='col-12 px-0 py-1 text-center nowrap'>
+					<h6 class="border-bottom mb-0"><a class="text-center" title="{{game.name}}" href="{% url 'gex-game-datail' game.id %}">{{game.name}}</a></h4>
+					<small>Platform: {{game.platform.name}}</small>
 				</div>
 			</div>
 		{% endfor %}
+		{% include "gameexch/paginator.html" %}
 	</div>
 {% endblock content %}

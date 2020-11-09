@@ -10,9 +10,9 @@ from django.contrib.auth.mixins import (
     LoginRequiredMixin,
     UserPassesTestMixin
 )
-from gameexch.models import UserComment
+from gameexch.models import Comment
 from .models import Profile
-from .forms import UserCommentForm
+from .forms import CommentForm
 from django.shortcuts import get_object_or_404
 from django.core.exceptions import PermissionDenied
 
@@ -95,12 +95,12 @@ class ProfileDetailView(DetailView):
     template_name = 'users/profile_view.html'
 
     def post(self, request, *args, **kwargs):
-        comment_form = UserCommentForm(request.POST or None)
+        comment_form = CommentForm(request.POST or None)
         if comment_form.is_valid():
             message = request.POST.get('message')
-            comment = UserComment.objects.create(user=self.user.get_object().user,
-                                                 author=request.user,
-                                                 message=message)
+            comment = Comment.objects.create(user=self.user.get_object().user,
+                                             author=request.user,
+                                             message=message)
             comment.save()
             messages.success(request,
                              'Your massage was created!')
@@ -110,9 +110,9 @@ class ProfileDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['comments'] = UserComment.objects.filter(
+        context['comments'] = Comment.objects.filter(
             user=self.get_object().user).order_by('-id')
-        context['comment_form'] = UserCommentForm
+        context['comment_form'] = CommentForm
         return context
 
 

@@ -1,10 +1,69 @@
 body{
-	font-family:Helvetica,Arial,sans-serif;
-  	background-color:#15193f;
-  	color:#fff;
+	font-family: 'Open Sans', sans-serif;
+	background-color: #000749;
+	color: #F5F5F5;
 }
 
 .btn-like:hover, .btn-like:focus, .btn-like:active, .btn-like.active, .open>.dropdown-toggle.btn-like {
 	background-color: #FF4040;
 	border-color: #750000;
+}
+
+.img-wrapper {
+	position: relative;
+}
+  
+.img-responsive {
+	width: 100%;
+	height: auto;
+}
+
+.img-overlay-options {
+	position: absolute;
+	top: 2%;
+	bottom: 0;
+	left: 2%;
+	right: 0;
+}
+
+.btn-right {
+	text-align: right;
+	right: 2%;
+}
+
+.nowrap{
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+.pagination > li > a{
+	background-color: #0269D9;
+	border-color: white;
+	color: white;
+}
+.pagination > .disabled > a{
+	background-color: #0269D9 !Important;
+	border-color: white !Important;
+	color: gray !Important;
+}
+
+.pagination > .active > a{
+	background-color: white !Important;
+	border-color: white !Important;
+	color: #0269D9 !Important;
+}
+
+.commentary-word-wrapper{
+	overflow-wrap: normal;  /* не поддерживает IE, Firefox; является копией word-wrap */ 
+	word-wrap: break-word;
+	word-break: break-all;  /* не поддерживает Opera12.14, значение keep-all не поддерживается IE, Chrome */ 
+	line-break: auto;  /* нет поддержки для русского языка */ 
+	hyphens: manual;  /* значение auto не поддерживается Chrome */ 
+}
+
+.alert-error{
+	background-color: #470000;
+	border-radius: 7px;
+  	border: 2px solid red;
 }

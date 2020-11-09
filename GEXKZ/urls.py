@@ -16,35 +16,25 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from users import views as user_views
+from gameexch.views import index
 from django.contrib.auth import views as auth_views
 from django.conf import settings
 from django.conf.urls.static import static
 from users.forms import CheckBannedAuthenticationForm
 from users.views import (
-    ProfileDetailView, 
-    ProfileBanView, 
+    ProfileDetailView,
+    ProfileBanView,
     ProfileRulesChangeView
 )
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('gameexch.urls')),
-    path('register/', user_views.register, name='register'),
-    path('login/', 
-         auth_views.LoginView.as_view(template_name='users/login.html',
-                                      authentication_form=CheckBannedAuthenticationForm),
-         name='login'),   
-    path('logout/',
-         auth_views.LogoutView.as_view(template_name='users/logout.html'),
-         name='logout'),
-    path('profile/', user_views.profile, name='profile'),
-    path('profile/edit/', user_views.profile_edit, name='profile-edit'),
-    path('profile/<int:pk>', ProfileDetailView.as_view(), name='profile-view'),
-    path('profile/edit/<int:profile_id>', user_views.profile_moderation, name='profile-moderation'),
-    path('profile/ban/<int:pk>' , ProfileBanView.as_view(), name='profile-ban'),
-    path('profile/rules/<int:pk>', ProfileRulesChangeView.as_view(), name='profile-rules'),
+    path('games/', include('gameexch.urls')),
+    path('profile/', include('users.urls')),
+    path('', index, name='gex-index'),
 ]
 
 
 if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.MEDIA_URL,
+                          document_root=settings.MEDIA_ROOT)

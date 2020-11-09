@@ -1,7 +1,7 @@
 {% extends "gameexch/base/base.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
-	<div class="row py-4">
+	<div class="row">
 		{% if object.banned %}
 			<div class="col-12">
 				<h4 class="border-bottom text-danger">Sorry, this user was banned</h4>
@@ -9,13 +9,13 @@
 					<a href="{% url 'profile-ban' object.id %}">Unban User</a></p>
 				{% endif %}
 		{% else %}
-			<div class="col-sm-4 col-md-3 text-center">
+			<div class="col-12 col-sm-4 col-md-3 text-center">
 				<img class="img-fluid gex-image" src="{{ object.image.url }}">
 			</div>
-			<div class="col-sm-8 col-md-6">
+			<div class="col-12 col-sm-8 col-md-6">
 				<h4 class="profile-name border-bottom text-center">{{ object.user.username }}</h4>
 				<div class="row mx-auto">
-					<div class="col-6 mt-1">
+					<div class="col-6">
 						<small>
 							<p class="user-profile-info">E-mail: {{ object.user.email }}</p>
 							{% if object.user.first_name or object.user.last_name %}
@@ -26,7 +26,7 @@
 							{% endif %}
 						</small>
 					</div>
-					<div class="col-6 mt-1">
+					<div class="col-6">
 						<small>
 							{% if object.phone %}
 								<p class="user-profile-info">Phone: {{ object.phone }}</p>
@@ -50,7 +50,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-sm-8 col-md-3">
+			<div class="col-12 col-sm-8 col-md-3">
 				<h4 class="profile-name border-bottom">Games:</h4>
 				<p><a href="#">Wanted Games</a></p>
 				<p><a href="#">Owned Games</a></p>

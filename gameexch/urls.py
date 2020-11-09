@@ -5,7 +5,7 @@ from .views import (
     GameCreateView,
     GameUpdateView,
     GameDeleteView,
-    GameCommentDeleteView
+    CommentDeleteView
 )
 from . import views
 
@@ -19,7 +19,7 @@ urlpatterns = [
     path('game/<int:pk>/delete',
          GameDeleteView.as_view(),
          name='gex-game-delete'),
-    path('about/', views.about, name='gex-about'),
-    path('game/comment/<int:pk>/delete', GameCommentDeleteView.as_view(),
+
+    path('game/comment/<int:pk>/delete', CommentDeleteView.as_view(),
          name='gex-game-comment-delete'),
 ]

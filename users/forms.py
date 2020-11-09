@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from .models import Profile
-from gameexch.models import UserComment
+from gameexch.models import Comment
 
 
 class CheckBannedAuthenticationForm(AuthenticationForm):
@@ -34,6 +34,7 @@ class UserUpdateForm(forms.ModelForm):
 
 
 class ProfileUpdateForm(forms.ModelForm):
+    image = forms.ImageField(widget=forms.FileInput)
 
     class Meta:
         model = Profile
@@ -41,7 +42,7 @@ class ProfileUpdateForm(forms.ModelForm):
                   'whatsapp', 'telegram']
 
 
-class UserCommentForm(forms.ModelForm):
+class CommentForm(forms.ModelForm):
     class Meta:
-        model = UserComment
+        model = Comment
         fields = ['message', ]

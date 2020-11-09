@@ -1,0 +1,34 @@
+{% load crispy_forms_tags %}
+<form method="POST" class="row mb-4">
+    {% csrf_token %}
+    <legend class="border-bottom">Leave a commentary</legend>
+    <div class="col-10 pr-5 pr-md-4">
+        {{ comment_form|crispy }}
+    </div>
+    <div class="col-2 form-group d-flex flex-row-reverse pt-5">
+        <button class="btn btn-primary" type="submit">Submit</button>
+    </div>
+</form>
+<div class="row my-0">
+    {% for comment in page_obj.object_list %}
+        <div class="col-3 mb-3 text-center">
+            <img class="img-fluid gex-comment-image" src="{{comment.author.profile.image.url}}">
+            {% if comment.author.profile.rules == 'U' and user.profile.rules == 'M' or user.profile.rules == 'A' or user == comment.author %}
+                <small><a href="{% url 'gex-game-comment-delete' comment.id %}">Delete</a></small>
+            {% endif %}
+        </div>
+        <div class="col-7 col-md-8 pr-4 pr-md-3 pr-lg-1 pr-xl-0 mb-3">
+            <h5 class="border-bottom"><a href="{% url 'profile-view' comment.author.profile.pk%}">{{comment.author.username}}</a></h5>
+            <p class="commentary-word-wrapper">{{comment.message}}</p>
+        </div>
+        <div class="col-1 d-flex flex-row-reverse">
+            <form method="post">
+                {% csrf_token %}
+                <input type="hidden" name="comment_pk" value="{{comment.pk}}">
+                <button type="submit" name="method" value="comment_like" class="btn btn-sm {% if user in comment.liked_by.all %}btn-danger{% else %}btn-primary{% endif %} btn-like" title='Like'><i class="far fa-heart"></i></button>
+                <p class="text-right">{{comment.likes}}</p>
+            </form>
+        </div>
+    {% endfor %}
+    {% include "gameexch/paginator.html" %}
+</div>

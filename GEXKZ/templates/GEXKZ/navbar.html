@@ -1,0 +1,37 @@
+<header class="site-header">
+	<nav class="navbar navbar-expand-md navbar-dark py-0" style="background-color: #070A20;">
+		<a href="{% url 'gex-start-page' %}" class="navbar-brand ml-3">
+				<img src="/media/Logo.webp" style="max-width:100px;">
+		</a>
+		<button class="navbar-toggler" data-toggle="collapse" data-target="#navbarMenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+		<div class="collapse navbar-collapse" id="navbarMenu">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item">
+					<a class="nav-link" href="#"><b>Games</b></a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#"><b>Search</b></a>
+				</li>
+			</ul>
+			<ul class="navbar-nav mr-3"> 
+			{% if user.is_authenticated %}
+				<li class="nav-item">
+					<a class="nav-link" title='Profile' href="{% url 'profile' %}"><i class="fas fa-id-badge"></i></a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" title='Logout' href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i></a>
+				</li>
+			{% else %}
+				<li class="nav-item">
+					<a class="nav-link" title='Login' href="{% url 'login' %}"><i class="fas fa-sign-in-alt"></i></a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" title='Register' href="{% url 'register' %}"><i class="fas fa-user-plus"></i></a>
+				</li>
+			{% endif %}
+			</ul>
+		</div>
+	</nav>
+</header>
