@@ -1,4 +1,4 @@
-{% extends "gameexch/base/base.html" %}
+{% extends "base/base.html" %}
 {% load static %}
 {% load gex_tags %}
 {% block content %}
@@ -32,6 +32,6 @@
 				</div>
 			</div>
 		{% endfor %}
-		{% include "gameexch/paginator.html" %}
+		{% include "utility/paginator.html" %}
 	</div>
 {% endblock content %}

@@ -19,7 +19,6 @@ urlpatterns = [
     path('game/<int:pk>/delete',
          GameDeleteView.as_view(),
          name='gex-game-delete'),
-
     path('game/comment/<int:pk>/delete', CommentDeleteView.as_view(),
          name='gex-game-comment-delete'),
 ]

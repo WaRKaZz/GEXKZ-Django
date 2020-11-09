@@ -19,16 +19,16 @@ from django.core.exceptions import PermissionDenied
 
 def register(request):
     if request.method == 'POST':
-        form = UserRegistrationForm(request.POST)
-        if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
+        user_form = UserRegistrationForm(request.POST)
+        if user_form.is_valid():
+            user_form.save()
+            username = user_form.cleaned_data.get('username')
             messages.success(request,
                              f'Your account {username} has been created you are now able to log in')
             return redirect('login')
     else:
-        form = UserRegistrationForm()
-    return render(request, 'users/register.html', {'form': form})
+        user_form = UserRegistrationForm()
+    return render(request, 'users/register.html', {'user_form': user_form})
 
 
 @login_required

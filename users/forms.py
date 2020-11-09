@@ -24,6 +24,16 @@ class UserRegistrationForm(UserCreationForm):
         fields = ['username', 'email', 'password1', 'password2']
 
 
+class ProfileRegistrationForm(UserCreationForm):
+
+    image = forms.ImageField(widget=forms.FileInput)
+
+    class Meta:
+        model = Profile
+        fields = ['image', 'vk', 'phone',
+                  'whatsapp', 'telegram']
+
+
 class UserUpdateForm(forms.ModelForm):
 
     email = forms.EmailField()

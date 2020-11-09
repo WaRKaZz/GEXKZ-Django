@@ -1,4 +1,4 @@
-{% extends "gameexch/base/base.html" %}
+{% extends "base/base.html" %}
 {% load static %}
 {% load gex_tags %}
 {% load crispy_forms_tags %}
@@ -40,7 +40,7 @@
 			</div>
 		{% endif %}
 		<div class="col-md-8 col-sm-12"> 
-			{% include "gameexch/game_commentary_block.html" %}
+			{% include "gameexch/utility/game_commentary_block.html" %}
 		</div>
 		{% if user.profile.rules == 'M' or user.profile.rules == 'A' %}
 			<div class="col-12 col-md-4">

@@ -23,6 +23,7 @@ def index(request):
 
 
 class GameListView(ListView):
+    template_name = "gameexch/game_object/game_list.html"
     model = Game
     paginate_by = 12
 
@@ -38,9 +39,11 @@ class GameListView(ListView):
 
 
 class GameDetailView(DetailView):
+    template_name = "gameexch/game_object/game_detail.html"
     model = Game
 
     def post(self, request, *args, **kwargs):
+        method = request.POST.get('method')
         if request.user.is_authenticated:
             comment_form = CommentForm(request.POST or None)
             print(comment_form.errors.as_text())
@@ -52,13 +55,10 @@ class GameDetailView(DetailView):
                 comment.save()
                 messages.success(request,
                                  'Your massage was created!')
-            else:
-                messages.error(request, comment_form.errors.as_text()[5])
-
-            method = request.POST.get('method')
-            if method in ('owner', 'whishlist', 'like', 'comment_like'):
+            elif method in ('owner', 'whishlist', 'like', 'comment_like'):
                 game_methods_handler(request, method)
-
+            else:
+                messages.error(request, comment_form.errors.as_text()[10:])
         return redirect('gex-game-datail', pk=self.get_object().id)
 
     def get_context_data(self, **kwargs):
@@ -74,6 +74,7 @@ class GameDetailView(DetailView):
 
 
 class GameCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
+    template_name = "gameexch/game_object/game_form.html"
     model = Game
     fields = ['name', 'image', 'genre', 'platform']
 
@@ -83,8 +84,9 @@ class GameCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
 
 
 class GameUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    template_name = "gameexch/game_object/game_form.html"
     model = Game
-    fields = ['name', 'description', 'image', 'genre', 'console']
+    fields = ['name', 'image', 'genre', 'platform']
 
     def test_func(self):
         return (self.request.user.profile.rules == 'M'
@@ -92,6 +94,7 @@ class GameUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
 
 class GameDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    template_name = "gameexch/game_object/game_confirm_delete.html"
     model = Game
     success_url = '/'
 
@@ -106,6 +109,7 @@ class CommentDeleteView(LoginRequiredMixin,
     model = Comment
 
     def get_success_url(self):
+        print('laga')
         return reverse('gex-game-datail',
                        kwargs={'pk': self.get_object().game.id})
 
